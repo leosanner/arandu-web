@@ -1,14 +1,16 @@
-import { UserCredentialsModel } from "@/models/user/userCredentials";
-import { UserGetJwtModel } from "@/models/user/userGetAPiRequest";
+import { UserCredentialsModel } from '@/models/user/userCredentials';
 import {
   CreateUserAPiModel,
   CreateUserApiResponseModel,
-} from "@/models/user/userPostApiRequest";
+  LoginUserApiResponseModel,
+} from '@/models/user/userPostApiRequest';
 
 export interface UserApiInterface {
-  login(userCredentials: UserCredentialsModel): Promise<UserGetJwtModel>;
+  login(
+    userCredentials: UserCredentialsModel,
+  ): Promise<LoginUserApiResponseModel>;
 
   createUser(
-    userInformation: CreateUserAPiModel
+    userInformation: CreateUserAPiModel,
   ): Promise<CreateUserApiResponseModel>;
 }

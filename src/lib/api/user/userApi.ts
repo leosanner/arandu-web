@@ -1,11 +1,12 @@
 import {
   CreateUserAPiModel,
   CreateUserApiResponseModel,
+  LoginUserApiResponseModel,
 } from '@/models/user/userPostApiRequest';
 import { UserApiInterface } from './user-interface';
-import { UserGetJwtModel } from '@/models/user/userGetAPiRequest';
 import { UserApiRoutes } from '../routes';
 import { UserCredentialsModel } from '@/models/user/userCredentials';
+import { cookies } from 'next/headers';
 
 export class UserApi implements UserApiInterface {
   async createUser(
@@ -17,17 +18,36 @@ export class UserApi implements UserApiInterface {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userInformation),
+      credentials: 'include', // cookies
     });
 
     return response.json();
   }
 
-  async login(userCredentials: UserCredentialsModel): Promise<UserGetJwtModel> {
-    const response = fetch(UserApiRoutes.AUTH, {
+  async login(
+    userCredentials: UserCredentialsModel,
+  ): Promise<LoginUserApiResponseModel> {
+    const response = await fetch(UserApiRoutes.AUTH, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(userCredentials),
+      credentials: 'include',
     });
 
-    return (await response).json();
+    const headerCookies = response.headers.get('set-cookie');
+
+    if (headerCookies) {
+      (await cookies()).set({
+        name: 'token',
+        value: headerCookies,
+        httpOnly: true,
+        path: '/',
+      });
+      console.log(headerCookies);
+    }
+
+    return response.json();
   }
 }

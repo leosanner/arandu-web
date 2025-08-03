@@ -10,6 +10,8 @@ import { fieldsTemplate } from './fields';
 import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
 
+// TODO: Turn form in a component
+
 export function Register() {
   const [message, formAction, isPending] = useActionState(
     handleRegisterSubmit,

@@ -20,5 +20,5 @@ export const ApiRoutes = {
 
 export const UserApiRoutes = {
   CREATE: ApiRoutes.USER,
-  AUTH: ApiRoutes.USER + 'auth',
+  AUTH: ApiRoutes.USER + 'login',
 };

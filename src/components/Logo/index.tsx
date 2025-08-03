@@ -7,7 +7,7 @@ export function Logo() {
       <div className='flex items-center'>
         <div
           className={clsx(
-            'border- border-purple-900 w-14 h-14 rounded-full',
+            'border-3 border-purple-900 w-14 h-14 rounded-full',
             'md:w-20  md:h-20',
             'transition-all duration-200 ease-in-out',
             'min-md:border-4',
@@ -15,7 +15,7 @@ export function Logo() {
         ></div>
         <div
           className={clsx(
-            '-ml-6 border-2 border-purple-900 w-14 h-14 rounded-full',
+            '-ml-6 border-3 border-purple-900 w-14 h-14 rounded-full',
             'md:w-20 md:h-20 md:-ml-8',
             'transition-all duration-200 ease-in-out',
             'min-md:border-4',

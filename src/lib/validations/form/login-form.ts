@@ -1,44 +1,32 @@
 'use server';
 
-import { createUser } from '@/data-access-layer/user';
-import { registerSchema } from './register-schema';
+import { UserCredentialsModel } from '@/models/user/userCredentials';
+import { LoginSchema } from './login-schema';
+import { loginUser } from '@/data-access-layer/user';
 import { z } from 'zod';
-
-type RegisterFormSubmit = {
-  firstName: string;
-  lastName: string;
-  password: string;
-  email: string;
-  username: string;
-};
 
 type FieldErrors = Record<string, string[]>;
 
-export type RegisterValidationResult = {
+export type LoginValidationResult = {
   success: boolean;
   fieldErrorNames?: string[];
   fieldErrors?: FieldErrors;
 };
 
-//
-
-export async function handleRegisterSubmit(
-  prevState: RegisterValidationResult,
+export async function handleLoginSubmit(
+  prevState: LoginValidationResult,
   formData: FormData,
-): Promise<RegisterValidationResult> {
-  const rawFormData = Object.fromEntries(formData) as RegisterFormSubmit;
-  const validationResult = registerSchema.safeParse(rawFormData);
-
-  // If the credentials are valid, then send the credential to the backend
+): Promise<LoginValidationResult> {
+  const rawFormData = Object.fromEntries(formData) as UserCredentialsModel;
+  const validationResult = LoginSchema.safeParse(rawFormData);
 
   if (validationResult.success) {
-    const request = await createUser(rawFormData);
+    const request = await loginUser(rawFormData);
 
     if (request.success) {
       return { success: true };
     }
 
-    // inform user that user already exists
     return { success: false };
   }
 

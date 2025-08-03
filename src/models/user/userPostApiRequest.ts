@@ -3,6 +3,12 @@ export type CreateUserApiResponseModel = {
   message: string;
 };
 
+export type LoginUserApiResponseModel = {
+  success: boolean;
+  message: string;
+  token: string;
+};
+
 export type CreateUserAPiModel = {
   username: string;
   password: string;
