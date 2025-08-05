@@ -1,20 +1,23 @@
 import { CreateEventResponse } from '@/models/events/eventPostRequest';
 import { EventsInterface } from './events-interface';
-import { EventModel } from '@/models/events/eventsModel';
+import { CreateEventDTO, EventModel } from '@/models/events/eventsModel';
 import { EventApiRoutes } from '../routes';
-import { cookies } from 'next/headers';
+import { getCookies } from '@/lib/cookies';
 
 export type FetchObject = RequestInit;
 
 // TODO: method to get cookies
 
 export class EventsApi implements EventsInterface {
-  async createEvent(event: EventModel): Promise<CreateEventResponse> {
+  async createEvent(event: CreateEventDTO): Promise<CreateEventResponse> {
+    const cookieValue = await getCookies();
+    console.log(cookieValue);
+
     const request = await fetch(EventApiRoutes.CREATE, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Cookies: 'bla',
+        Cookie: cookieValue ? cookieValue : '',
       },
       body: JSON.stringify(event),
     });
@@ -23,16 +26,14 @@ export class EventsApi implements EventsInterface {
   }
 
   async getAllEvents(): Promise<EventModel[]> {
-    const _cookies = await cookies();
-    const cookieValue = _cookies.get('token')?.value;
-
-    console.log(cookieValue);
+    const cookieValue = await getCookies();
 
     const fetchObject: FetchObject = {
       method: 'GET',
       headers: {
         Cookie: cookieValue ? cookieValue : '',
       },
+      // next -> cache / Add memoization too
     };
 
     const request = await fetch(EventApiRoutes.GET_ALL_EVENTS, fetchObject);

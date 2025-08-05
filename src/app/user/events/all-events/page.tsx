@@ -1,17 +1,14 @@
-import { eventsApi } from '@/lib/api/events';
+import { DisplayEvent } from '@/components/DisplayEvent';
+import { eventApi } from '@/lib/api/events';
 
 export default async function DisplayAllEventsPage() {
-  async function printCookies() {
-    const response = await eventsApi.getAllEvents();
-
-    console.log(response);
-  }
-
-  printCookies();
+  const allEvents = await eventApi.getAllEvents();
 
   return (
-    <div>
-      <p>DisplayAllEventsPage</p>
+    <div className='flex flex-col gap-y-2'>
+      {allEvents.map(event => {
+        return <DisplayEvent key={event.name} event={event} />;
+      })}
     </div>
   );
 }

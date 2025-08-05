@@ -20,7 +20,7 @@ export const ApiRoutes = {
 
 export const UserApiRoutes = {
   CREATE: ApiRoutes.USER,
-  AUTH: ApiRoutes.USER + 'login',
+  LOGIN: ApiRoutes.USER + 'login',
 };
 
 export const EventApiRoutes = {

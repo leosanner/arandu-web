@@ -29,8 +29,6 @@ export async function handleRegisterSubmit(
   const rawFormData = Object.fromEntries(formData) as RegisterFormSubmit;
   const validationResult = registerSchema.safeParse(rawFormData);
 
-  // If the credentials are valid, then send the credential to the backend
-
   if (validationResult.success) {
     const request = await createUser(rawFormData);
 

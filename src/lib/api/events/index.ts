@@ -1,4 +1,4 @@
 import { EventsInterface } from './events-interface';
 import { EventsApi } from './eventsApi';
 
-export const eventsApi: EventsInterface = new EventsApi();
+export const eventApi: EventsInterface = new EventsApi();

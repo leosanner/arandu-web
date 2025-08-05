@@ -28,7 +28,7 @@ export class UserApi implements UserApiInterface {
   async login(
     userCredentials: UserCredentialsModel,
   ): Promise<LoginUserApiResponseModel> {
-    const response = await fetch(UserApiRoutes.AUTH, {
+    const response = await fetch(UserApiRoutes.LOGIN, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
