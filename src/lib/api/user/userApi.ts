@@ -24,6 +24,7 @@ export class UserApi implements UserApiInterface {
     return response.json();
   }
 
+  // TODO: if user aleready logged in, dont need to call backend
   async login(
     userCredentials: UserCredentialsModel,
   ): Promise<LoginUserApiResponseModel> {

@@ -22,6 +22,7 @@ export async function handleLoginSubmit(
 
   if (validationResult.success) {
     const request = await loginUser(rawFormData);
+    console.log(request);
 
     if (request.success) {
       return { success: true };
