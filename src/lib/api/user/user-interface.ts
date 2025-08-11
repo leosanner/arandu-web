@@ -4,6 +4,14 @@ import {
   CreateUserApiResponseModel,
   LoginUserApiResponseModel,
 } from '@/models/user/userPostApiRequest';
+import { headers } from 'next/headers';
+
+// {
+//   headers: {},
+//   body: { success: false, message: 'Invalid email or password.' },
+//   statusCode: 'BAD_REQUEST',
+//   statusCodeValue: 400
+// }
 
 export interface UserApiInterface {
   login(

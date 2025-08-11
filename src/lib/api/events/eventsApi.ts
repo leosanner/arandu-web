@@ -1,8 +1,15 @@
-import { CreateEventResponse } from '@/models/events/eventPostRequest';
+import {
+  CreateEventResponse,
+  DeleteEventDTO,
+  DeleteEventResponse,
+} from '@/models/events/eventPostRequest';
 import { EventsInterface } from './events-interface';
 import { CreateEventDTO, EventModel } from '@/models/events/eventsModel';
 import { EventApiRoutes } from '../routes';
 import { getCookies } from '@/lib/cookies';
+import { eventTags } from '@/lib/cache/eventCacheTag';
+import { revalidateTag } from 'next/cache';
+import { json } from 'zod';
 
 export type FetchObject = RequestInit;
 
@@ -11,9 +18,8 @@ export type FetchObject = RequestInit;
 export class EventsApi implements EventsInterface {
   async createEvent(event: CreateEventDTO): Promise<CreateEventResponse> {
     const cookieValue = await getCookies();
-    console.log(cookieValue);
 
-    const request = await fetch(EventApiRoutes.CREATE, {
+    const response = await fetch(EventApiRoutes.CREATE, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +28,14 @@ export class EventsApi implements EventsInterface {
       body: JSON.stringify(event),
     });
 
-    return request.json();
+    const data: CreateEventResponse = await response.json();
+
+    if (response.ok && data.success) {
+      console.log('Tag revalidada');
+      revalidateTag(eventTags.GET_ALL_EVENTS);
+    }
+
+    return data;
   }
 
   async getAllEvents(): Promise<EventModel[]> {
@@ -33,11 +46,35 @@ export class EventsApi implements EventsInterface {
       headers: {
         Cookie: cookieValue ? cookieValue : '',
       },
-      // next -> cache / Add memoization too
+      next: {
+        tags: [eventTags.GET_ALL_EVENTS],
+      },
     };
 
     const request = await fetch(EventApiRoutes.GET_ALL_EVENTS, fetchObject);
 
     return request.json();
+  }
+
+  async deleteEvent(
+    deleteEventDTO: DeleteEventDTO,
+  ): Promise<DeleteEventResponse> {
+    const cookieValue = await getCookies();
+
+    const response = await fetch(EventApiRoutes.DELETE, {
+      method: 'DELETE',
+      headers: {
+        Cookie: cookieValue ? cookieValue : '',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(deleteEventDTO),
+      next: {
+        tags: [eventTags.GET_ALL_EVENTS],
+      },
+    });
+
+    const data: DeleteEventResponse = await response.json();
+
+    return data;
   }
 }

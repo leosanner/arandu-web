@@ -1,6 +1,11 @@
 import { eventApi } from '@/lib/api/events';
+import { DeleteEventDTO } from '@/models/events/eventPostRequest';
 import { CreateEventDTO } from '@/models/events/eventsModel';
 
-export async function createEvent(event: CreateEventDTO) {
+export async function createEventDAL(event: CreateEventDTO) {
   return eventApi.createEvent(event);
+}
+
+export async function deleteEventDAL(deleteEventDTO: DeleteEventDTO) {
+  return await eventApi.deleteEvent(deleteEventDTO);
 }

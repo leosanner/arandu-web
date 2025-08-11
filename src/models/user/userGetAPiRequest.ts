@@ -3,3 +3,9 @@ export type UserGetJwtModel = {
   jwt: string;
   userEmail: string;
 };
+
+export type BasicUserInformationCache = {
+  firstName: string;
+  lastName: string;
+  email: string;
+};

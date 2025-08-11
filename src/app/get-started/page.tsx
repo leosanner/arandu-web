@@ -1,5 +1,8 @@
+import { Header } from '@/components/Header';
 import { Logo } from '@/components/Logo';
 import { Register } from '@/components/Register';
+import { SpinLoader } from '@/components/SpinLoader';
+import { Suspense } from 'react';
 
 export function generateMetadata() {
   return {
@@ -10,8 +13,10 @@ export function generateMetadata() {
 export default function GetStarted() {
   return (
     <>
-      <Logo />
-      <Register />
+      <Header />
+      <Suspense fallback={<SpinLoader />}>
+        <Register />
+      </Suspense>
     </>
   );
 }

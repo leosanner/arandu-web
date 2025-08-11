@@ -9,8 +9,8 @@ export function Container({ children }: ContainerProps) {
     <div
       className={clsx(
         'flex flex-col ',
-        'gap-y-8 mt-24 px-10',
-        'max-w-[640px]',
+        'gap-y-8 mt-16 px-10',
+        'max-w-[820px]',
         'sm:mx-auto',
       )}
     >

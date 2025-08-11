@@ -37,6 +37,12 @@ export class UserApi implements UserApiInterface {
       credentials: 'include',
     });
 
+    const data = await response.json();
+
+    if (!data.success) {
+      return await data.body;
+    }
+
     const headerCookies = response.headers.get('set-cookie');
 
     if (headerCookies) {
@@ -46,9 +52,8 @@ export class UserApi implements UserApiInterface {
         httpOnly: true,
         path: '/',
       });
-      console.log(headerCookies);
     }
 
-    return response.json();
+    return data;
   }
 }

@@ -5,6 +5,7 @@ export type EventModel = {
   description: string;
   label: string;
   createdAt: string;
+  id: number;
 };
 
 export type CreateEventDTO = {

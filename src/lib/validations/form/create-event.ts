@@ -1,10 +1,13 @@
 'use server';
 
-import { createEvent } from '@/data-access-layer/event';
+import { createEventDAL } from '@/data-access-layer/event';
 import { createEventSchema } from './create-event-schema';
 import { z } from 'zod';
 import { CreateEventDTO, EventModel } from '@/models/events/eventsModel';
-import { formatDateToObject } from '@/utils/formatDateToObject';
+import {
+  formatDateTimeZone,
+  formatDateToObject,
+} from '@/utils/formatDateToObject';
 
 type CreateEventResponse = {
   success: boolean;
@@ -24,6 +27,9 @@ export async function handleCreateEventSubmit(
     const eventDate = new Date(eventInformation.startDate);
     const dateObject = formatDateToObject(eventDate);
 
+    console.log('Event ISO UTC:');
+    console.log(formatDateTimeZone(eventInformation.startDate));
+
     const createEventDTO: CreateEventDTO = {
       days: dateObject.days,
       hours: dateObject.hours,
@@ -34,7 +40,7 @@ export async function handleCreateEventSubmit(
       description: eventInformation.description,
     };
 
-    const response = await createEvent(createEventDTO);
+    const response = await createEventDAL(createEventDTO);
     console.log(response);
 
     return {

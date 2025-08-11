@@ -1,9 +1,13 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-export function Logo() {
+type LogoProps = {
+  href?: string;
+};
+
+export function Logo({ href = '/' }: LogoProps) {
   return (
-    <Link href='/'>
+    <Link href={href}>
       <div className='flex items-center'>
         <div
           className={clsx(
@@ -23,9 +27,7 @@ export function Logo() {
         ></div>
 
         <div className='ml-1'>
-          <span className={clsx('text-4xl', 'md:text-5xl', 'lg:text-7xl')}>
-            Arandu
-          </span>
+          <span className={clsx('text-4xl', 'md:text-5xl')}>Arandu</span>
         </div>
       </div>
     </Link>
