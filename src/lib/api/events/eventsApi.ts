@@ -9,11 +9,8 @@ import { EventApiRoutes } from '../routes';
 import { getCookies } from '@/lib/cookies';
 import { eventTags } from '@/lib/cache/eventCacheTag';
 import { revalidateTag } from 'next/cache';
-import { json } from 'zod';
 
 export type FetchObject = RequestInit;
-
-// TODO: method to get cookies
 
 export class EventsApi implements EventsInterface {
   async createEvent(event: CreateEventDTO): Promise<CreateEventResponse> {

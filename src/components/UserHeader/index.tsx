@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { Logo } from '../Logo';
-import { CalendarDays, Plus, UserRoundPen } from 'lucide-react';
+import { BotMessageSquare, CalendarDays, Plus } from 'lucide-react';
 
 export function UserHeader() {
   return (
@@ -28,8 +28,8 @@ export function UserHeader() {
         <Link aria-label='Calendar' href='/user/events/all-events'>
           <CalendarDays />
         </Link>
-        <Link aria-label='User preferences' href='user/events/all-events'>
-          <UserRoundPen />
+        <Link aria-label='User preferences' href='/user/ai/plan-events'>
+          <BotMessageSquare />
         </Link>
       </div>
     </header>

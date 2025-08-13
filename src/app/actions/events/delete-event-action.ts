@@ -1,3 +1,5 @@
+'use server';
+
 import { deleteEventDAL } from '@/data-access-layer/event';
 import { DeleteEventDTO } from '@/models/events/eventPostRequest';
 

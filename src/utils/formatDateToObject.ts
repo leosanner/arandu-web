@@ -10,10 +10,10 @@ type DateTypeObject = {
 
 export function formatDateToObject(date: Date): DateTypeObject {
   return {
-    days: date.getDay(),
+    days: date.getDate(),
     hours: date.getHours(),
     minutes: date.getMinutes(),
-    month: date.getMonth(),
+    month: date.getMonth() + 1,
     years: date.getFullYear(),
   };
 }

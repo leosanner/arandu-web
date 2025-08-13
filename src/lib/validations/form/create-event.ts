@@ -24,6 +24,9 @@ export async function handleCreateEventSubmit(
 
   if (validationFields.success) {
     const eventInformation = validationFields.data as EventModel;
+
+    console.log(eventInformation.startDate);
+
     const eventDate = new Date(eventInformation.startDate);
     const dateObject = formatDateToObject(eventDate);
 
@@ -39,6 +42,9 @@ export async function handleCreateEventSubmit(
       name: eventInformation.name,
       description: eventInformation.description,
     };
+
+    console.log('Create event DTO: ');
+    console.log(createEventDTO);
 
     const response = await createEventDAL(createEventDTO);
     console.log(response);

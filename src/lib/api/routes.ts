@@ -7,6 +7,7 @@ const apiRoute = 'http://localhost:8080/';
 const paths: { [key: string]: string } = {
   user: 'user/',
   event: 'event/',
+  ai: 'ai/',
 };
 
 // Major routes address
@@ -14,6 +15,7 @@ const paths: { [key: string]: string } = {
 export const ApiRoutes = {
   USER: apiRoute + paths.user,
   EVENT: apiRoute + paths.event,
+  AI: apiRoute + paths.ai,
 };
 
 // Each API resource available
@@ -27,4 +29,9 @@ export const EventApiRoutes = {
   CREATE: ApiRoutes.EVENT,
   GET_ALL_EVENTS: ApiRoutes.EVENT,
   DELETE: ApiRoutes.EVENT + 'delete',
+};
+
+export const AiApiRoutes = {
+  PLAN_EVENTS: ApiRoutes.AI,
+  CHAT_USER: ApiRoutes.AI + 'chat',
 };

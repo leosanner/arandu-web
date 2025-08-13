@@ -1,22 +1,21 @@
 'use client';
 
-import { deleteEvent } from '@/app/actions/events/delete-event';
 import clsx from 'clsx';
-import { useActionState } from 'react';
+import { useTransition } from 'react';
 
 type DialogProps = {
   display: boolean;
   onCancel: () => void;
-  // onConfirm: () => null;
+  onConfirm: () => void;
 };
 
-export function Dialog({ display, onCancel }: DialogProps) {
-  const [deleteEventResponse, formAction, isPending] = useActionState(
-    deleteEvent,
-    { success: false },
-  );
-  function handleCancel() {
-    onCancel();
+export function Dialog({ display, onCancel, onConfirm }: DialogProps) {
+  const [isPending, startTransition] = useTransition();
+
+  function handleConfirm() {
+    startTransition(() => {
+      onConfirm();
+    });
   }
 
   return (
@@ -32,11 +31,18 @@ export function Dialog({ display, onCancel }: DialogProps) {
         <div className='flex gap-x-10'>
           <button
             className='p-3 bg-white border-1 rounded-2xl cursor-pointer hover:bg-slate-200'
-            onClick={handleCancel}
+            onClick={onCancel}
           >
             Cancelar
           </button>
-          <button className='p-5 bg-red-200 rounded-2xl cursor-pointer hover:bg-red-400'>
+          <button
+            className={clsx(
+              'p-5 bg-red-200 rounded-2xl cursor-pointer hover:bg-red-400',
+              isPending && 'cursor-not-allowed',
+            )}
+            onClick={handleConfirm}
+            disabled={isPending}
+          >
             Confirmar
           </button>
         </div>
