@@ -9,3 +9,7 @@ export async function createEventDAL(event: CreateEventDTO) {
 export async function deleteEventDAL(deleteEventDTO: DeleteEventDTO) {
   return await eventApi.deleteEvent(deleteEventDTO);
 }
+
+export async function getAllEventsDAL() {
+  return await eventApi.getAllEvents();
+}

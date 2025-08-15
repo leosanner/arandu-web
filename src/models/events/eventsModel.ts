@@ -17,3 +17,18 @@ export type CreateEventDTO = {
   name: string;
   description: string;
 };
+
+export type UpdateEventDTO = {
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+};
+
+export type EventDTO = {
+  startDate: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  id: number;
+};
