@@ -2,6 +2,7 @@
 
 import { getAllEventsDAL } from '@/data-access-layer/event';
 import { EventDTO, EventModel } from '@/models/events/eventsModel';
+import { firstLastDay } from '.';
 
 {
   year: {
@@ -12,11 +13,11 @@ import { EventDTO, EventModel } from '@/models/events/eventsModel';
   }
 }
 
-type EventClusterType = Record<number, MonthClusterType>;
+type EventClusterType = Record<string, MonthClusterType>;
 
-type MonthClusterType = Record<number, DayClusterType>;
+type MonthClusterType = Record<string, DayClusterType>;
 
-type DayClusterType = Record<number, EventModel[]>;
+export type DayClusterType = Record<string, EventModel[]>;
 
 export function buildEventDTO(event: EventModel): EventDTO {
   return {
@@ -57,4 +58,32 @@ export async function structuredEventsResponse(): Promise<EventClusterType> {
   }
 
   return eventCluster;
+}
+
+export async function structuredEventsResponseByState(state: number) {
+  const monthEvents: DayClusterType = {};
+
+  // All events related to the current user
+  const eventCluster = await structuredEventsResponse();
+
+  // First day of the month and last of the previous month
+  const [f, l] = firstLastDay(state);
+
+  // Information related to the time interval displayed on the screen
+  const currentMonth = f.getMonth();
+  const currentYear = f.getFullYear();
+
+  // Looking for events in the current time interval displayed
+
+  if (eventCluster[currentYear]) {
+    if (eventCluster[currentYear][currentMonth]) {
+      const currentMonthEvents = eventCluster[currentYear][currentMonth];
+
+      for (const [key, event] of Object.entries(currentMonthEvents)) {
+        monthEvents[key] = event;
+      }
+    }
+  }
+
+  return monthEvents;
 }

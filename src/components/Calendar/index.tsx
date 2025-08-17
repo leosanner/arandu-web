@@ -1,21 +1,17 @@
-'use client';
-
-import { calendarDays } from '@/lib/calendar';
+import { DateContextProvider } from '@/context/DateContext';
 import { CalendarContainer } from '../CalendarContainer';
-import { GetContext } from '@/context/getContext';
-import { CalendarDay } from '../CalendarDay';
+import { CalendarDays } from '../CalendarDays';
+
+export const dynamic = 'force-dynamic';
 
 export function Calendar() {
-  const { state, setState } = GetContext();
-  const arrTest = calendarDays(state);
-
   return (
     <>
-      <CalendarContainer>
-        {arrTest.map(n => {
-          return <CalendarDay dayObject={n} key={n.id} />;
-        })}
-      </CalendarContainer>
+      <DateContextProvider>
+        <CalendarContainer>
+          <CalendarDays />
+        </CalendarContainer>
+      </DateContextProvider>
     </>
   );
 }

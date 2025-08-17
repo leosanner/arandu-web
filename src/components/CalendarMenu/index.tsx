@@ -1,4 +1,5 @@
 import { GetContext } from '@/context/getContext';
+import clsx from 'clsx';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 type CalendarMenuProps = {
@@ -8,6 +9,10 @@ type CalendarMenuProps = {
 
 export function CalendarMenu({ month, year }: CalendarMenuProps) {
   const { state, setState } = GetContext();
+
+  const buttonClass = clsx(
+    'cursor-pointer hover:bg-slate-200 outline-0 hover:ring-1 rounded-sm',
+  );
 
   const weekDays = [
     { short: 'D', sm: 'Domingo', full: 'Domingo' },
@@ -35,11 +40,11 @@ export function CalendarMenu({ month, year }: CalendarMenuProps) {
         </h2>
 
         <div className='flex gap-x-3 align-middle'>
-          <button>
+          <button className={buttonClass}>
             <ArrowLeft onClick={decrease} />
           </button>
 
-          <button>
+          <button className={buttonClass}>
             <ArrowRight onClick={increase} />
           </button>
         </div>
@@ -47,7 +52,6 @@ export function CalendarMenu({ month, year }: CalendarMenuProps) {
       <div className='grid grid-flow-row grid-cols-7 overflow-x-auto text-center font-semibold'>
         {weekDays.map((day, i) => (
           <div key={i} className='text-center md:text-xl'>
-            {/* no mobile (padrão) mostra curto, no sm: mostra completo */}
             <span className='sm:hidden'>{day.short}</span>
             <span className='hidden sm:inline lg:hidden'>{day.sm}</span>
             <span className='hidden lg:inline'>{day.full}</span>
