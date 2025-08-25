@@ -28,6 +28,7 @@ export const UserApiRoutes = {
 export const EventApiRoutes = {
   CREATE: ApiRoutes.EVENT,
   GET_ALL_EVENTS: ApiRoutes.EVENT,
+  GET_DAY_EVENTS: ApiRoutes.EVENT,
   DELETE: ApiRoutes.EVENT + 'delete',
 };
 

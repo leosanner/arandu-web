@@ -13,3 +13,7 @@ export async function deleteEventDAL(deleteEventDTO: DeleteEventDTO) {
 export async function getAllEventsDAL() {
   return await eventApi.getAllEvents();
 }
+
+export async function getSlugDateEventsDAL(slugDate: string) {
+  return await eventApi.getEventsBySlugDate(slugDate);
+}

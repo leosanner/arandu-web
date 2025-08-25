@@ -8,6 +8,8 @@ import { CreateEventDTO, EventModel } from '@/models/events/eventsModel';
 export interface EventsInterface {
   getAllEvents(): Promise<EventModel[]>;
 
+  getEventsBySlugDate(slugDate: string): Promise<EventModel[]>;
+
   createEvent(event: CreateEventDTO): Promise<CreateEventResponse>;
 
   deleteEvent(eventId: DeleteEventDTO): Promise<DeleteEventResponse>;

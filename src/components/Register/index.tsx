@@ -37,12 +37,12 @@ export function Register() {
         </h1>
         <span className='text-lg'>
           Já possui conta?{' '}
-          <Link href='/login' className='text-purple-950 font-semibold'>
+          <Link href='/login' className='text-purple-800 font-semibold'>
             Login
           </Link>
         </span>
       </header>
-      <form className='flex flex-col w-full' action={formAction}>
+      <form className='flex flex-col w-full gap-y-5' action={formAction}>
         {fieldsTemplate.map(({ name, label, placeholder, type = 'text' }) => (
           <div key={name}>
             <FormField
@@ -58,12 +58,12 @@ export function Register() {
 
         <button
           className={clsx(
-            'bg-stone-200',
+            'bg-purple-950',
             'w-1/2 h-8',
             'rounded-2xl',
             'm-auto mt-8',
             'md: text-lg',
-            'active:bg-stone-500',
+            'active:bg-purple-800',
             'transition-colors',
             'duration-75',
             'cursor-pointer',

@@ -6,23 +6,33 @@ type LogoProps = {
 };
 
 export function Logo({ href = '/' }: LogoProps) {
+  const iconClass = clsx(
+    'border-3 border-purple-900 size-10 rounded-full',
+    'md:size-12',
+    'transition-all duration-200 ease-in-out',
+    'min-md:border-4',
+  );
+
   return (
     <Link href={href}>
       <div className='flex items-center'>
         <div
           className={clsx(
-            'border-3 border-purple-900 w-14 h-14 rounded-full',
-            'md:w-20  md:h-20',
-            'transition-all duration-200 ease-in-out',
-            'min-md:border-4',
+            // 'border-3 border-purple-900 size-10 rounded-full',
+            // 'md:size-12',
+            // 'transition-all duration-200 ease-in-out',
+            // 'min-md:border-4',
+            iconClass,
           )}
         ></div>
         <div
           className={clsx(
-            '-ml-6 border-3 border-purple-900 w-14 h-14 rounded-full',
-            'md:w-20 md:h-20 md:-ml-8',
-            'transition-all duration-200 ease-in-out',
-            'min-md:border-4',
+            // '-ml-5 border-2 border-purple-900 size-10 rounded-full',
+            // 'md:size-12 md:-ml-6',
+            // 'transition-all duration-200 ease-in-out',
+            // 'min-md:border-4',
+            iconClass,
+            '-ml-5 md:-ml-6',
           )}
         ></div>
 

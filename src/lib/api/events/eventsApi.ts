@@ -53,6 +53,27 @@ export class EventsApi implements EventsInterface {
     return request.json();
   }
 
+  async getEventsBySlugDate(slugDate: string): Promise<EventModel[]> {
+    const cookieValue = await getCookies();
+
+    const fetchObject: FetchObject = {
+      method: 'GET',
+      headers: {
+        Cookie: cookieValue ? cookieValue : '',
+      },
+      next: {
+        tags: [eventTags.GET_ALL_EVENTS],
+      },
+    };
+
+    const request = await fetch(
+      EventApiRoutes.GET_DAY_EVENTS + slugDate,
+      fetchObject,
+    );
+
+    return request.json();
+  }
+
   async deleteEvent(
     deleteEventDTO: DeleteEventDTO,
   ): Promise<DeleteEventResponse> {

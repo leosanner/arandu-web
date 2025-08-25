@@ -6,7 +6,10 @@ import { CalendarDay } from '../CalendarDay';
 import { currentMonthEventsAction } from './monthInformationAction';
 import { useEffect, useState } from 'react';
 import { DayClusterType } from '@/lib/calendar/events-api-cluster';
-import { verifyDayEvents } from '@/lib/calendar/day-information';
+import {
+  getDayBusyLevel,
+  verifyDayEvents,
+} from '@/lib/calendar/day-information';
 
 export function CalendarDays() {
   const { state, setState } = GetContext();
@@ -23,11 +26,15 @@ export function CalendarDays() {
   return (
     <>
       {days.map(day => {
+        const dayEvents = verifyDayEvents(day, monthEvents);
+        const busyLevel = getDayBusyLevel(dayEvents);
+
         return (
           <CalendarDay
+            // dayEvents={dayEvents}
             dayObject={day}
             key={day.id}
-            busyLevel={verifyDayEvents(day, monthEvents)}
+            busyLevel={busyLevel}
           />
         );
       })}

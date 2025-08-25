@@ -6,15 +6,21 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { CalendarBusyDayDisplay } from '../CalendarBusyDayDisplay';
 import { BusyLevel } from '@/lib/calendar/day-information';
+import { EventModel } from '@/models/events/eventsModel';
 
 type CalendarDayProps = {
   dayObject: CalendarDayType;
   busyLevel: BusyLevel;
+  // dayEvents: EventModel[];
 };
 
 // IMPORTANT: Only this component must be client side
 
-export function CalendarDay({ dayObject, busyLevel }: CalendarDayProps) {
+export function CalendarDay({
+  dayObject,
+  busyLevel,
+}: // dayEvents,
+CalendarDayProps) {
   const { currentMonth, day, id, currentDay } = dayObject;
   const { state, setState } = GetContext();
 
@@ -39,7 +45,7 @@ export function CalendarDay({ dayObject, busyLevel }: CalendarDayProps) {
     <div key={id} className={divClass}>
       <div>
         {/* TODO: implement dynamic event page */}
-        <Link href={`/test/${slugDate}`}>
+        <Link href={`/user/calendar/${slugDate}`}>
           {currentMonth ? (
             <CalendarBusyDayDisplay day={day} busyLevel={busyLevel} />
           ) : (

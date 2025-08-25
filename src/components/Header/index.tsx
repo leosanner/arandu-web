@@ -1,9 +1,16 @@
-import { Menu, User } from 'lucide-react';
+'use client';
+
+import { Menu } from 'lucide-react';
 import { Logo } from '../Logo';
 import clsx from 'clsx';
-import Link from 'next/link';
+import { useState } from 'react';
+import { NavBarLinkElements } from '../NavBarLinkElements';
 
 export function Header() {
+  const [state, setState] = useState(false);
+
+  const closeMenu = () => setState(false);
+
   return (
     <header
       className={clsx(
@@ -11,7 +18,7 @@ export function Header() {
         'justify-between',
         'items-center',
         'mx-4',
-        'mt-4',
+        'mt-8',
         'sm:mx-15 sm:mt-8',
         'md:mx-20',
         'lg:mx-30',
@@ -19,7 +26,29 @@ export function Header() {
       )}
     >
       <Logo />
-      <Menu className='w-10 h-10 sm:hidden' />
+      <button onClick={() => setState(!state)}>
+        <Menu
+          className={clsx(
+            'w-10 h-10 sm:hidden hover:bg-gray-200 outline-0 hover:ring-1 rounded-md ',
+          )}
+        />
+      </button>
+
+      <div
+        className={clsx(
+          'fixed right-0 w-1/3 bg-zinc-800 mt-40 mr-4',
+          ' outline-0 ring-1 p-2 text-xl rounded-md sm:hidden',
+          'transition-all duration-100 ease-out',
+          state
+            ? 'translate-0'
+            : 'opacity-0 pointer-events-none translate-x-full',
+        )}
+      >
+        <div className='flex flex-col  gap-y-2'>
+          <NavBarLinkElements disable={closeMenu} />
+        </div>
+      </div>
+
       <div
         className={clsx(
           'hidden text-2xl items-center',
@@ -28,28 +57,7 @@ export function Header() {
           'lg:text-2xl lg:gap-x-10',
         )}
       >
-        <Link
-          href=''
-          className='border-b-2 border-transparent hover:border-b-2 hover:border-purple-700'
-        >
-          Sobre
-        </Link>
-        <Link
-          href=''
-          className='border-b-2 border-transparent hover:border-b-2 hover:border-purple-700'
-        >
-          Planos
-        </Link>
-        <Link href='/login'>
-          <User
-            className={clsx(
-              'bg-purple-200 rounded-lg border-1 border-purple-900 hover:bg-purple-400',
-              'sm:w-6 sm:h-6',
-              'md:w-8 md:h-8',
-              // 'lg:w-8 lg:h-8',
-            )}
-          />
-        </Link>
+        <NavBarLinkElements disable={closeMenu} />
       </div>
     </header>
   );

@@ -23,7 +23,7 @@ export default function LoginPage() {
           <h1 className='text-3xl md:text-4xl font-bold'>Log In</h1>
           <span className='text-lg'>
             Primeira vez?{' '}
-            <Link href='/get-started' className='text-purple-950 font-semibold'>
+            <Link href='/get-started' className='text-purple-800 font-semibold'>
               Cadatre-se
             </Link>
           </span>
@@ -59,8 +59,8 @@ export default function LoginPage() {
 
           <button
             className={clsx(
-              'bg-stone-200',
-              'hover:bg-slate-300',
+              'bg-purple-950',
+              'hover:bg-purple-800',
               'w-1/2 h-8',
               'rounded-2xl',
               'm-auto mt-8',

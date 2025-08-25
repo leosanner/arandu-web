@@ -9,14 +9,14 @@ export type BusyLevel = 'free' | 'easy' | 'medium' | 'hard';
 export function verifyDayEvents(
   currentDay: CalendarDayType,
   monthEvents: DayClusterType,
-): BusyLevel {
+): EventModel[] {
   for (const [day, events] of Object.entries(monthEvents)) {
     if (day === currentDay.day.toString() && currentDay.currentMonth) {
-      return getDayBusyLevel(events);
+      return events;
     }
   }
 
-  return 'free';
+  return [];
 }
 
 // Simple label implementation
