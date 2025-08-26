@@ -1,6 +1,8 @@
 'use server';
 
-import { planUserEventsDAL } from '@/data-access-layer/ai';
+// This action is just for development purposes
+
+import { sendEmailByAIDAL } from '@/data-access-layer/ai';
 
 // TODO: load balancer
 
@@ -11,7 +13,7 @@ type GenerateScheduleType = {
 export async function generateSchedule(
   prevState: GenerateScheduleType,
 ): Promise<GenerateScheduleType> {
-  const response = await planUserEventsDAL();
+  const response = await sendEmailByAIDAL();
 
   return {
     aiResponse: response.message,

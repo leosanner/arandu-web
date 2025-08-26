@@ -35,4 +35,5 @@ export const EventApiRoutes = {
 export const AiApiRoutes = {
   PLAN_EVENTS: ApiRoutes.AI,
   CHAT_USER: ApiRoutes.AI + 'chat',
+  NEWS_REPORT: ApiRoutes.AI + 'news-api',
 };

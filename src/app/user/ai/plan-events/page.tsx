@@ -3,7 +3,6 @@
 import { generateSchedule } from '@/app/actions/ai/plan-schedule';
 import clsx from 'clsx';
 import { startTransition, useActionState } from 'react';
-import { Markdown } from '@/components/Markdown';
 
 export default function AiPlanEventsPage() {
   const [state, action, isPending] = useActionState(generateSchedule, {
@@ -28,12 +27,8 @@ export default function AiPlanEventsPage() {
           disabled={isPending}
           onClick={handleClick}
         >
-          Gerar planejamento rápido.
+          Gerar resumo email.
         </button>
-      </div>
-
-      <div className='flex p-10 bg-purple-200/20 mt-10'>
-        {state.aiResponse && <Markdown content={state.aiResponse} />}
       </div>
     </>
   );
