@@ -13,16 +13,23 @@ export function DefaultButton({
   className = '',
 }: DefaultButtonProps) {
   const linkClass = clsx(
-    'bg-gray-400 p-3 rounded-sm ring-3',
-    ' hover:bg-slate-300-400md:p-3 md:text-2xl ',
+    'bg-gray-500 p-2 rounded-sm ',
+    'hover:bg-slate-800',
+    'transition-all',
     'font-semibold text-2xl',
     'text-black',
+
     className,
   );
 
   return (
     <Link href={href} className={linkClass}>
-      {content}
+      <div className='relative w-64 h-16 bg-slate-600 overflow-hidden group cursor-pointer'>
+        <div className='absolute inset-0 bg-violet-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out'></div>
+        <span className='relative z-10 flex items-center justify-center h-full text-white'>
+          {content}
+        </span>
+      </div>
     </Link>
   );
 }

@@ -12,6 +12,7 @@ export default function AiPlanEventsPage() {
   function handleClick() {
     startTransition(() => {
       action();
+      console.log(state);
     });
   }
 
@@ -27,7 +28,7 @@ export default function AiPlanEventsPage() {
           disabled={isPending}
           onClick={handleClick}
         >
-          Gerar resumo email.
+          {isPending ? 'Gerando email ...' : 'Gerar resumo email.'}
         </button>
       </div>
     </>

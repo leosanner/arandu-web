@@ -36,8 +36,8 @@ export function DisplayEvent({ event }: DisplayEventProps) {
   }
 
   return (
-    <div className='w-full m-auto bg-zinc-200 flex flex-col gap-y-3 p-5'>
-      <h2 className='text-lg font-bold'>
+    <div className='w-full m-auto bg-purple-500/30 flex flex-col gap-y-3 p-5 rounded-2xl'>
+      <h2 className='text-xl font-bold'>
         <Link
           href={`/user/events/${event.id}`}
           className='hover:text-slate-400'
@@ -47,27 +47,32 @@ export function DisplayEvent({ event }: DisplayEventProps) {
       </h2>
       <div className='flex flex-col gap-y-1'>
         <p>
-          <span className='font-semibold'>Criado em: </span>
+          <span className='font-semibold text-slate-300'>Criado em: </span>
           {formatDatetime(event.createdAt)}
         </p>
         <p>
-          <span className='font-semibold'>Descrição: </span>
+          <span className='font-semibold text-slate-300'>Descrição: </span>
           {event.description}
         </p>
         <p>
-          <span className='font-semibold'>Programado para: </span>
+          <span className='font-semibold text-slate-300'>
+            Programado para:{' '}
+          </span>
           {formatDatetime(event.startDate)}
         </p>
       </div>
 
       <div className='flex gap-x-8'>
         <button
-          className={clsx('bg-gray-400 p-2 rounded-xl', 'cursor-pointer')}
+          className={clsx(
+            'bg-gray-600 hover:bg-gray-700 p-2 rounded-xl',
+            'cursor-pointer',
+          )}
         >
           <Pencil />
         </button>
         <button onClick={handleDelete}>
-          <Trash2 className='text-red-700 cursor-pointer' />
+          <Trash2 className='text-red-700 hover:scale-120 transition  cursor-pointer' />
         </button>
         <Dialog display={state} onCancel={handleDelete} onConfirm={onDelete} />
       </div>

@@ -18,6 +18,7 @@ export function CalendarContainer({ children }: CalendarContainerProps) {
       className={clsx(
         'flex flex-col my-10 mx-5 gap-y-5',
         'sm:gap-y-7 sm:mt-15',
+        'md:mx-35 md:gap-y-10',
       )}
     >
       <CalendarMenu

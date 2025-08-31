@@ -17,7 +17,8 @@ export function Hero() {
           'gap-y-15',
           'sm:gap-y-7',
           'md:gap-y-10',
-          'mt-30',
+          'mt-5',
+          'lg:mt-20',
         )}
       >
         <div>

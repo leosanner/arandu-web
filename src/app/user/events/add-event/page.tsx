@@ -27,7 +27,7 @@ export default function CreateEvent() {
             <h1 className='text-3xl md:text-4xl font-bold mb-2'>
               Registrar Evento
             </h1>
-            <input type='checkbox' className='size-4' />
+            <input type='checkbox' name='includeInReport' className='size-4' />
           </div>
           <FormField
             inputProps={{
@@ -83,14 +83,18 @@ export default function CreateEvent() {
           </div>
           <button
             className={clsx(
-              'bg-stone-200',
+              'bg-violet-600',
               'w-1/2 h-8',
               'rounded-2xl',
               'm-auto mt-8',
               'md: text-lg',
-              'active:bg-stone-400 active:border-2',
+              'active:bg-violet-500 active:border-2',
               'transition-colors',
               'duration-150',
+              'font-semibold',
+              'cursor-pointer',
+              'hover:bg-violet-800',
+              'transition',
             )}
             type='submit'
             disabled={isPending}

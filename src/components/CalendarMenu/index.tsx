@@ -11,8 +11,10 @@ export function CalendarMenu({ month, year }: CalendarMenuProps) {
   const { state, setState } = GetContext();
 
   const buttonClass = clsx(
-    'cursor-pointer hover:bg-slate-200 outline-0 hover:ring-1 rounded-sm',
+    'cursor-pointer hover:bg-zinc-600 outline-0 hover:ring-1 rounded-sm',
   );
+
+  const iconClass = clsx('md:size-8');
 
   const weekDays = [
     { short: 'D', sm: 'Domingo', full: 'Domingo' },
@@ -35,17 +37,17 @@ export function CalendarMenu({ month, year }: CalendarMenuProps) {
   return (
     <>
       <div className='flex justify-between align-middle'>
-        <h2 className='font-semibold text-xl'>
+        <h2 className='text-amber-400 font-semibold text-xl md:text-2xl'>
           {month}, {year}
         </h2>
 
         <div className='flex gap-x-3 align-middle'>
           <button className={buttonClass}>
-            <ArrowLeft onClick={decrease} />
+            <ArrowLeft onClick={decrease} className={iconClass} />
           </button>
 
           <button className={buttonClass}>
-            <ArrowRight onClick={increase} />
+            <ArrowRight onClick={increase} className={iconClass} />
           </button>
         </div>
       </div>

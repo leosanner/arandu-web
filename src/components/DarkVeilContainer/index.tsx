@@ -9,7 +9,7 @@ export function DarkVeilContainer({ children }: DarkVeilContainerProps) {
     <div className='relative '>
       {/* Background layer */}
       <div className='fixed inset-0 -z-10'>
-        <DarkVeil color={[0.0, 0.05, 0.15]} />
+        <DarkVeil color={[0.01, 0.1, 0.2]} />
       </div>
 
       {/* Content layer */}

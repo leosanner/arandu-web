@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='bg-zinc-900 text-zinc-200'>
-      <body>
+    <html lang='en'>
+      <body className='bg-zinc-900 text-zinc-200'>
         {children}
         <ToastContainer />
       </body>

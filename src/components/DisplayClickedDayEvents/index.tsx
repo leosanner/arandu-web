@@ -28,7 +28,7 @@ export function DisplayClickedDayEvents({
       <div className='flex flex-col mx-3 mt-10 ring-2'>
         {arr.map((_, index) => {
           return (
-            <div key={index} className='py-3 px-1 border-b-1 flex gap-x-3'>
+            <div key={index} className='py-3 px-1 border-b-1 flex gap-x-3 '>
               <span className='text-center font-semibold w-8'>{index}</span>{' '}
               <span>
                 {eventObject[index] &&

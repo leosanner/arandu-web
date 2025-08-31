@@ -26,18 +26,18 @@ export function Dialog({ display, onCancel, onConfirm }: DialogProps) {
         display ? 'hidden' : '',
       )}
     >
-      <div className='bg-zinc-100 p-10 flex flex-col gap-y-6 rounded-xl'>
-        <h2 className='font-semibold text-center text-xl'>Tem certeza?</h2>
+      <div className='bg-zinc-700 p-10 flex flex-col gap-y-6 rounded-xl ring-2'>
+        <h2 className='font-semibold text-center text-2xl'>Tem certeza?</h2>
         <div className='flex gap-x-10'>
           <button
-            className='p-3 bg-white border-1 rounded-2xl cursor-pointer hover:bg-slate-200'
+            className='p-3 bg-zinc-700 border-1 rounded-2xl cursor-pointer hover:bg-zinc-600'
             onClick={onCancel}
           >
             Cancelar
           </button>
           <button
             className={clsx(
-              'p-5 bg-red-200 rounded-2xl cursor-pointer hover:bg-red-400',
+              'p-5 bg-red-500 rounded-2xl cursor-pointer hover:bg-red-400',
               isPending && 'cursor-not-allowed',
             )}
             onClick={handleConfirm}

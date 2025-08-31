@@ -35,8 +35,9 @@ CalendarDayProps) {
     dayStyleClass,
     'flex justify-center cursor-pointer transition',
     'm-1 p-3 outline-0 rounded-xl text-center',
-    'hover:ring-2 hover:ring-zinc-600 hover:bg-neutral-800',
-    currentDay && 'bg-slate-600/70 hover:bg-slate-600',
+    'md:m-4',
+    'hover:ring-2  hover:bg-amber-600',
+    currentDay && 'bg-amber-700/70',
   );
 
   const slugDate = slugComponentFullDate(day, state);
