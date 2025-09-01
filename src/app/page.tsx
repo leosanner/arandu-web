@@ -1,3 +1,4 @@
+import { AboutUs } from '@/components/AboutUs';
 import { DarkVeilContainer } from '@/components/DarkVeilContainer';
 import { FullWindowContainer } from '@/components/FullWindowContainer';
 import { Header } from '@/components/Header';
@@ -11,6 +12,9 @@ export default async function Home() {
           <Header />
           <Hero />
         </DarkVeilContainer>
+      </FullWindowContainer>
+      <FullWindowContainer className='bg-slate-700'>
+        <AboutUs />
       </FullWindowContainer>
     </>
   );

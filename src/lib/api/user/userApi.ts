@@ -7,14 +7,13 @@ import { UserApiInterface } from './user-interface';
 import { UserApiRoutes } from '../routes';
 import { UserCredentialsModel } from '@/models/user/userCredentials';
 import { cookies } from 'next/headers';
+import { COOKIE_NAME } from '@/lib/consts';
 
 export class UserApi implements UserApiInterface {
   async createUser(
     userInformation: CreateUserAPiModel,
   ): Promise<CreateUserApiResponseModel> {
-    console.log('Chegou na aba de criar');
     try {
-      console.log('Passando pelo try');
       const response = await fetch(UserApiRoutes.CREATE, {
         method: 'POST',
         headers: {
@@ -24,16 +23,10 @@ export class UserApi implements UserApiInterface {
         credentials: 'include', // cookies
       });
 
-      console.log('Passou pelo fetch');
-
       const responseData = await response.json();
-      console.log(responseData);
 
       return responseData;
     } catch (e) {
-      console.log('Pegou erro');
-      console.log(e);
-
       return {
         message: e instanceof Error ? e.message : 'Generic error',
         success: false,
@@ -62,9 +55,9 @@ export class UserApi implements UserApiInterface {
 
       const headerCookies = response.headers.get('set-cookie');
 
-      if (headerCookies) {
+      if (headerCookies && COOKIE_NAME) {
         (await cookies()).set({
-          name: 'token',
+          name: COOKIE_NAME,
           value: headerCookies,
           httpOnly: true,
           path: '/',

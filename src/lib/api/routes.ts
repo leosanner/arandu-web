@@ -1,6 +1,8 @@
 // Domain Application Address
 
-const apiRoute = 'http://localhost:8080/';
+import { BACKEND_URL } from '../env-consts';
+
+const apiRoute = BACKEND_URL;
 
 // Available Paths
 

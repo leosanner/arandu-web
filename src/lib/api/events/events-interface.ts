@@ -4,11 +4,14 @@ import {
   DeleteEventResponse,
 } from '@/models/events/eventPostRequest';
 import { CreateEventDTO, EventModel } from '@/models/events/eventsModel';
+import { GenericResponseDTO } from '@/models/api-response-model';
 
 export interface EventsInterface {
-  getAllEvents(): Promise<EventModel[]>;
+  getAllEvents(): Promise<EventModel[] | GenericResponseDTO>;
 
-  getEventsBySlugDate(slugDate: string): Promise<EventModel[]>;
+  getEventsBySlugDate(
+    slugDate: string,
+  ): Promise<EventModel[] | GenericResponseDTO>;
 
   createEvent(event: CreateEventDTO): Promise<CreateEventResponse>;
 

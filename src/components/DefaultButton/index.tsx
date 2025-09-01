@@ -13,23 +13,26 @@ export function DefaultButton({
   className = '',
 }: DefaultButtonProps) {
   const linkClass = clsx(
-    'bg-gray-500 p-2 rounded-sm ',
-    'hover:bg-slate-800',
-    'transition-all',
-    'font-semibold text-2xl',
-    'text-black',
+    // 'bg-gray-500 p-2 rounded-sm ',
+    // 'hover:bg-slate-800',
+    // 'transition-all',
+    // 'font-semibold text-2xl',
+    // 'text-black',
 
     className,
   );
 
   return (
     <Link href={href} className={linkClass}>
-      <div className='relative w-64 h-16 bg-slate-600 overflow-hidden group cursor-pointer'>
-        <div className='absolute inset-0 bg-violet-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out'></div>
-        <span className='relative z-10 flex items-center justify-center h-full text-white'>
+      <button className='group relative inline-flex h-15 items-center justify-center overflow-hidden rounded-md border border-purple-400 bg-purple-600 font-bold text-xl'>
+        <div className='inline-flex h-15 translate-y-0 items-center justify-center px-12 text-zinc-200 transition duration-500 group-hover:-translate-y-[150%]'>
           {content}
-        </span>
-      </div>
+        </div>
+        <div className='absolute inline-flex h-15 w-full translate-y-[100%] items-center justify-center text-neutral-50 transition duration-500 group-hover:translate-y-0'>
+          <span className='absolute h-full w-full translate-y-full skew-y-12 scale-y-0 bg-pink-500/70 transition duration-500 group-hover:translate-y-0 group-hover:scale-150'></span>
+          <span className='z-10'>{content}</span>
+        </div>
+      </button>
     </Link>
   );
 }

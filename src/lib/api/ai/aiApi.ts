@@ -2,7 +2,7 @@ import { AiUserMessage, AiMessageResponse } from '@/models/ai/ai-post-models';
 import { AiInterface } from './ai-interface';
 import { AiApiRoutes } from '../routes';
 import { getCookies } from '@/lib/cookies';
-import { GenericResponseDTO } from '@/models/generic';
+import { GenericResponseDTO } from '@/models/api-response-model';
 
 export class AiApi implements AiInterface {
   async chatUser(userMessage: AiUserMessage): Promise<AiMessageResponse> {

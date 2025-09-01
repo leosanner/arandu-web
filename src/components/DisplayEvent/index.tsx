@@ -69,6 +69,7 @@ export function DisplayEvent({ event }: DisplayEventProps) {
             'cursor-pointer',
           )}
         >
+          {/* Pass event model with default values for input fields */}
           <Pencil />
         </button>
         <button onClick={handleDelete}>

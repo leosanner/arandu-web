@@ -9,11 +9,15 @@ import { EventApiRoutes } from '../routes';
 import { getCookies } from '@/lib/cookies';
 import { eventTags } from '@/lib/cache/eventCacheTag';
 import { revalidateTag } from 'next/cache';
+import { GenericResponseDTO } from '@/models/api-response-model';
+import { DEFAULT_ERROR_MSG } from '@/lib/consts';
 
 export type FetchObject = RequestInit;
 
 export class EventsApi implements EventsInterface {
-  async createEvent(event: CreateEventDTO): Promise<CreateEventResponse> {
+  async createEvent(
+    event: CreateEventDTO,
+  ): Promise<CreateEventResponse | GenericResponseDTO> {
     const cookieValue = await getCookies();
 
     const response = await fetch(EventApiRoutes.CREATE, {
@@ -25,17 +29,25 @@ export class EventsApi implements EventsInterface {
       body: JSON.stringify(event),
     });
 
-    const data: CreateEventResponse = await response.json();
+    try {
+      const data: CreateEventResponse = await response.json();
 
-    if (response.ok && data.success) {
-      console.log('Tag revalidada');
-      revalidateTag(eventTags.GET_ALL_EVENTS);
+      if (response.ok && data.success) {
+        // Revalidate tag for cookies
+        revalidateTag(eventTags.GET_ALL_EVENTS);
+      }
+      return data;
+    } catch (e) {
+      // TODO: if invalid params using @Valid in spring boot, get the field errors
+
+      return {
+        message: DEFAULT_ERROR_MSG,
+        success: false,
+      };
     }
-
-    return data;
   }
 
-  async getAllEvents(): Promise<EventModel[]> {
+  async getAllEvents(): Promise<EventModel[] | GenericResponseDTO> {
     const cookieValue = await getCookies();
 
     const fetchObject: FetchObject = {
@@ -48,9 +60,16 @@ export class EventsApi implements EventsInterface {
       },
     };
 
-    const request = await fetch(EventApiRoutes.GET_ALL_EVENTS, fetchObject);
+    try {
+      const request = await fetch(EventApiRoutes.GET_ALL_EVENTS, fetchObject);
 
-    return request.json();
+      return request.json();
+    } catch (e) {
+      return {
+        message: e instanceof Error ? e.message : DEFAULT_ERROR_MSG,
+        success: false,
+      };
+    }
   }
 
   async getEventsBySlugDate(slugDate: string): Promise<EventModel[]> {

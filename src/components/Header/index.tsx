@@ -29,7 +29,7 @@ export function Header() {
       <button onClick={() => setState(!state)}>
         <Menu
           className={clsx(
-            'w-10 h-10 sm:hidden hover:bg-gray-200 outline-0 hover:ring-1 rounded-md ',
+            'w-10 h-10 sm:hidden hover:bg-gray-700 outline-0 hover:ring-1 rounded-md cursor-pointer',
           )}
         />
       </button>
